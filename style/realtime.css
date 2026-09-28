@@ -1,0 +1,555 @@
+
+
+
+
+.data .map #map {
+  width: 100%;
+  height: 100%;
+}
+
+.data .map .tips {
+  margin-top: 10px;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.data .map .tips .item {
+  height: 30px;
+  line-height: 30px;
+  padding-left: 40px;
+  position: relative;
+  color: #fff;
+  font-size: 17px;
+}
+
+.data .map .tips .item.loc {
+  background: url("../images/ico_loc.png") left center no-repeat;
+  background-size: contain;
+}
+
+.data .map .tips .item span {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+.data .map .tips .item span.color-1 {
+  border:1px solid rgba(161,103,239,1);
+  background:linear-gradient(0deg,rgba(161,103,239,0.5) 0%,rgba(255,255,255,0.5) 100%);
+}
+
+.data .map .tips .item span.color-2 {
+  border:1px solid rgba(2,97,250,1);
+  background:linear-gradient(0deg,rgba(2,97,250,0.5) 0%,rgba(255,255,255,0.5) 100%);
+}
+
+.data .map .tips .item span.color-3 {
+  border:1px solid rgba(3,249,252,1);
+  background:linear-gradient(0deg,rgba(3,249,252,0.5) 0%,rgba(255,255,255,0.5) 100%);
+}
+
+.data .map .tips .item span.color-4 {
+  border:1px solid rgba(254,93,150,1);
+  background:linear-gradient(0deg,rgba(254,93,150,0.5) 0%,rgba(255,255,255,0.5) 100%);
+}
+
+.data .left .power {
+  margin-top: 60px;
+  height: 160px;
+  width: 524px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.data .left .power .item {
+
+}
+
+
+.data .left .power .item .title {
+  height: 26px;
+  line-height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.data .left .power .item .title .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.data .left .power .item .bg {
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.data .left .power .item .border {
+  border: 3px solid #B57FFF;
+  width: 100%;
+  height: 100%;
+  border-radius:50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.data .left .power .item .txt {
+  margin-top: 5px;
+  font-size:17px;
+  line-height:18px;
+  height: 47px;
+  line-height: 47px;
+  width: 100%;
+  text-align: center;
+}
+
+.data .left .power .item .wave {
+  width: 200%;
+  height: 51px;
+  position: absolute;
+  bottom: 0;
+  left: -36px;
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+}
+
+.data .left .power .item .ico {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 52px;
+  background-repeat: no-repeat;
+  background-size: auto 28px;
+  background-position: center;
+}
+
+.data .left .power .color-1 .title {
+  color: #B57FFF;
+}
+
+.data .left .power .color-1 .title .dot {
+  background: #B57FFF;
+}
+
+.data .left .power .color-1 .bg {
+  background: rgba(181,127,255,0.2);
+}
+
+.data .left .power .color-1 .border {
+  border-color: #B57FFF;
+}
+
+.data .left .power .color-1 .txt {
+  color: #B27DFB;
+}
+
+.data .left .power .color-1 .wave {
+  background-image: url("../images/color_1.png");
+}
+
+.data .left .power .color-1 .ico {
+  background-image: url("../images/color_1_ico.png");
+}
+
+.data .left .power .color-2 .title {
+  color: #F09450;
+}
+
+.data .left .power .color-2 .title .dot {
+  background: #F09450;
+}
+
+.data .left .power .color-2 .bg {
+  background: rgba(240,148,80,0.2);
+}
+
+.data .left .power .color-2 .border {
+  border-color: #F09450;
+}
+
+.data .left .power .color-2 .txt {
+  color: #F09450;
+}
+
+.data .left .power .color-2 .wave {
+  background-image: url("../images/color_2.png");
+}
+
+.data .left .power .color-2 .ico {
+  background-image: url("../images/color_2_ico.png");
+}
+
+.data .left .power .color-3 .title {
+  color: #00A8EC;
+}
+
+.data .left .power .color-3 .title .dot {
+  background: #00A8EC;
+}
+
+.data .left .power .color-3 .bg {
+  background: rgba(0,168,236,0.2);
+}
+
+.data .left .power .color-3 .border {
+  border-color: #00A8EC;
+}
+
+.data .left .power .color-3 .txt {
+  color: #00A8EC;
+}
+
+.data .left .power .color-3 .wave {
+  background-image: url("../images/color_3.png");
+}
+
+.data .left .power .color-3 .ico {
+  background-image: url("../images/color_3_ico.png");
+}
+
+.data .left .power .color-4 .title {
+  color: #09C785;
+}
+
+.data .left .power .color-4 .title .dot {
+  background: #09C785;
+}
+
+.data .left .power .color-4 .bg {
+  background: rgba(10,187,126,0.2);
+}
+
+.data .left .power .color-4 .border {
+  border-color: #09C785;
+}
+
+.data .left .power .color-4 .txt {
+  color: #09C785;
+}
+
+.data .left .power .color-4 .wave {
+  background-image: url("../images/color_4.png");
+}
+
+.data .left .power .color-4 .ico {
+  background-image: url("../images/color_4_ico.png");
+}
+
+
+.video {
+  margin: 20px 28px 0 70px;
+  height: 160px;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 70px;
+}
+
+.video h3 {
+  display: flex;
+  background: url("../images/title_vbg.png") center no-repeat;
+  flex-direction: column;
+  align-items: center;
+  width: 53px;
+  height: 155px;
+  font-size: 19px;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 3px;
+}
+
+.video .item {
+  height: 100%;
+  width: 338px;
+  border-radius: 20px;
+  overflow: hidden;
+  background:rgba(3,249,252,1);
+  border:1px solid rgba(3,249,252,1);
+}
+
+.video .item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.data .right .weather {
+  margin: 40px 20px 20px 20px;
+}
+
+.data .right .weather h3 {
+  background: url("../images/title_hbg_2.png") center no-repeat;
+  width: 108px;
+  height: 32px;
+  font-size: 22px;
+  line-height: 32px;
+}
+
+.data .right .weather .inner {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.data .right .weather .inner .item {
+  width: 25%;
+  border-right: 1px solid #0D2159;
+  text-align: center;
+}
+
+.data .right .weather .inner .item:last-of-type {
+  border:none;
+}
+
+.data .right .weather .inner .item .label {
+  height: 20px;
+  line-height: 20px;
+  padding-left: 28px;
+  background-repeat: no-repeat;
+  background-size: auto 20px;
+  background-position: left center;
+  text-align: left;
+  display: inline-block;
+  color: #fff;
+  font-size: 14px;
+}
+
+.data .right .weather .inner .item .ico-temp {
+  background-image: url("../images/ico_temp.png");
+}
+
+.data .right .weather .inner .item .ico-pres {
+  background-image: url("../images/ico_pres.png");
+}
+
+.data .right .weather .inner .item .ico-humi {
+  background-image: url("../images/ico_humi.png");
+}
+
+.data .right .weather .inner .item .ico-wind-s {
+  background-image: url("../images/ico_wind_s.png");
+}
+
+.data .right .weather .inner .item .ico-wind-d {
+  background-image: url("../images/ico_wind_d.png");
+}
+
+.data .right .weather .inner .item .txt {
+  height: 50px;
+  line-height: 50px;
+  font-size: 24px;
+  color: #03F9FC;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.data .right .weather .inner .item sub,
+.data .right .weather .inner .item sup {
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.data .right .weather .inner .item sub {
+  vertical-align: baseline;
+}
+
+.data .right .hydrology {
+  margin: 0 30px;
+  position: relative;
+  padding-left: 60px;
+  padding-right: 20px;
+}
+
+.data .right .hydrology h3 {
+  display: flex;
+  background: url("../images/title_vbg.png") center no-repeat;
+  flex-direction: column;
+  align-items: center;
+  width: 53px;
+  height: 155px;
+  font-size: 22px;
+  justify-content: center;
+  position: absolute;
+  line-height: 26px;
+  left: 0;
+  top: 18px;
+}
+
+
+.data .right .hydrology .charts {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.data .right .hydrology .charts .item {
+  width: 250px;
+}
+
+.data .right .hydrology .charts #hydrology_speed,
+.data .right .hydrology .charts #hydrology_direction {
+  width: 100%;
+  height: 200px;
+}
+
+.data .right .hydrology .charts .item .txt {
+  font-size: 14px;
+  color: #fff;
+  margin-top: -20px;
+  line-height: 28px;
+}
+
+.data .right .water {
+  margin: 0 30px;
+}
+
+.data .right .water h3 {
+  background: url("../images/title_hbg_2.png") center no-repeat;
+  background-size: 100% 100%;
+  width: 128px;
+  height: 34px;
+  font-size: 22px;
+  line-height: 34px;
+}
+
+.data .right .water .items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.data .right .water .items .item {
+  width: 45%;
+  margin-top: 21px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.data .right .water .items .item .label {
+  font-size: 14px;
+  color: #fff;
+  line-height: 24px;
+}
+
+.data .right .water .items .item .value {
+  font-size: 24px;
+  color: #03F9FC;
+  line-height: 24px;
+}
+
+.data .right .water .items .item .value sub {
+  vertical-align: baseline;
+  font-size: 12px;
+}
+
+.data .right .water .items .item .progress-bar {
+  width: 100%;
+  height: 12px;
+  border-radius: 6px;
+  text-align: left;
+  overflow: hidden;
+}
+
+.data .right .water .items .item .progress-bar .progress {
+  display: block;
+  height: 100%;
+  border-radius: 6px;
+  width: 0; 
+}
+
+.data .right .water .items .item .color-1 {
+  background: #303E8C;
+}
+
+.data .right .water .items .item .color-1 .progress {
+  background:linear-gradient(0deg,rgba(5,112,233,1) 0%,rgba(14,207,248,1) 100%);
+}
+
+.data .right .water .items .item .color-2 {
+  background: rgba(48,140,54,0.37);
+}
+
+.data .right .water .items .item .color-2 .progress {
+  background:linear-gradient(0deg,rgba(77,255,173,1) 0%,rgba(155,255,209,1) 100%);
+}
+
+.data .right .water .items .item .color-3 {
+  background: rgba(80,33,144,0.33);
+}
+
+.data .right .water .items .item .color-3 .progress {
+  background:linear-gradient(0deg,rgba(154,92,237,1) 0%,rgba(214,185,255,1) 100%);
+}
+
+.data .right .water .items .item .color-4 {
+  background: rgba(240,147,80,0.2);
+}
+
+.data .right .water .items .item .color-4 .progress {
+  background:linear-gradient(0deg,rgba(219,137,78,1) 0%,rgba(255,246,184,1) 100%);
+}
+
+.data .right .water .items .item .color-5 {
+  background: rgba(255,65,132,0.15);
+}
+
+.data .right .water .items .item .color-5 .progress {
+  background:linear-gradient(0deg,rgba(255,0,90,1) 0%,rgba(254,117,165,1) 100%);
+}
+
+.data .right .water .items .item .color-6 {
+  background: rgba(87,65,255,0.26);
+}
+
+.data .right .water .items .item .color-6 .progress {
+  background:linear-gradient(0deg,rgba(87,65,255,1) 0%,rgba(182,172,255,1) 100%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

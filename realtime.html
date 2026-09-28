@@ -1,0 +1,1523 @@
+<!doctype html>
+<html>
+<head>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="">
+    <meta name="description" content="">
+
+
+    <title>海洋牧场</title>
+
+
+    <link href="style/dashboard.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/screenfull.min.js"></script>
+    <script type="text/javascript" src="js/jquery.1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/jquery.waypoints.min.js"></script>
+    <script type="text/javascript" src="js/jquery.counterup.min.js"></script>
+    <script type="text/javascript" src="js/lunar.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+
+    <script type="text/javascript">
+        var BASE_URL = "/";
+
+    </script>
+    <link href="style/realtime.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript"
+            src="https://api.map.baidu.com/api?v=2.0&amp;ak=cMGdPFqtybi0WTbcpdpGdxvKqZL2hdLe"></script>
+
+    <style type="text/css">.BMap_cpyCtrl {
+        display: none;
+    }
+
+    .anchorBL {
+        display: none;
+    }
+
+    .map .infos {
+        position: absolute;
+        z-index: 1;
+        height: 34px;
+        top: 8px;
+        left: 8px;
+        right: 0px;
+        text-align: left;
+        line-height: 34px;
+        font-size: 16px;
+        text-indent: 1em;
+        background: url("images/title_hbg_1.png") center no-repeat;
+        background-size: 100% 100%;
+        color: #03F9FC;
+    }
+    </style>
+
+
+    <script type="text/javascript">
+
+
+        var areaPoints = [{
+            "idx": "1",
+            "lat": "39°28'37.948",
+            "lon": "123°4'5.981",
+            "gpsLat": 39.47720777777778,
+            "gpsLon": 123.06832805555555,
+            "bLat": 39.484397178561586,
+            "bLon": 123.08051170059053
+        }, {
+            "idx": "1",
+            "lat": "39°28'40.544",
+            "lon": "123°4'12.381",
+            "gpsLat": 39.47792888888889,
+            "gpsLon": 123.07010583333333,
+            "bLat": 39.48514553711847,
+            "bLon": 123.0822869131866
+        }, {
+            "idx": "1",
+            "lat": "39°28'22.191",
+            "lon": "123°4'22.108",
+            "gpsLat": 39.47283083333333,
+            "gpsLon": 123.07280777777778,
+            "bLat": 39.48008783590393,
+            "bLon": 123.08497635439295
+        }, {
+            "idx": "1",
+            "lat": "39°28'20.711",
+            "lon": "123°4'18.292",
+            "gpsLat": 39.47241972222222,
+            "gpsLon": 123.07174777777777,
+            "bLat": 39.479658847091144,
+            "bLon": 123.08391898336113
+        }, {
+            "idx": "2",
+            "lat": "39°28'27.854",
+            "lon": "123°4'35.565",
+            "gpsLat": 39.47440388888889,
+            "gpsLon": 123.07654583333333,
+            "bLat": 39.48172916949414,
+            "bLon": 123.08870382296037
+        }, {
+            "idx": "2",
+            "lat": "39°28'39.352",
+            "lon": "123°5'8.761",
+            "gpsLat": 39.47759777777778,
+            "gpsLon": 123.08576694444444,
+            "bLat": 39.48510658067025,
+            "bLon": 123.09788880196021
+        }, {
+            "idx": "2",
+            "lat": "39°27'58.492",
+            "lon": "123°5'35.656",
+            "gpsLat": 39.46624777777778,
+            "gpsLon": 123.09323777777777,
+            "bLat": 39.47389055307109,
+            "bLon": 123.1053124677636
+        }, {
+            "idx": "2",
+            "lat": "39°27'44.402",
+            "lon": "123°4'54.854",
+            "gpsLat": 39.46233388888889,
+            "gpsLon": 123.08190388888889,
+            "bLat": 39.469755522835364,
+            "bLon": 123.09402813240479
+        }, {
+            "idx": "3",
+            "lat": "39°28'40.683",
+            "lon": "123°6'9.390",
+            "gpsLat": 39.4779675,
+            "gpsLon": 123.10260833333334,
+            "bLat": 39.48575462918218,
+            "bLon": 123.11465927388096
+        }, {
+            "idx": "3",
+            "lat": "39°28'58.707",
+            "lon": "123°6'9.620",
+            "gpsLat": 39.482974166666665,
+            "gpsLon": 123.10267222222222,
+            "bLat": 39.490765071558954,
+            "bLon": 123.11472827602103
+        }, {
+            "idx": "3",
+            "lat": "39°29'59.330",
+            "lon": "123°6'53.197",
+            "gpsLat": 39.49981388888889,
+            "gpsLon": 123.11477694444444,
+            "bLat": 39.507676295472166,
+            "bLon": 123.12682858691048
+        }, {
+            "idx": "3",
+            "lat": "39°29'59.280",
+            "lon": "123°7'47.658",
+            "gpsLat": 39.4998,
+            "gpsLon": 123.129905,
+            "bLat": 39.50753238242562,
+            "bLon": 123.14198641855755
+        }, {
+            "idx": "3",
+            "lat": "39°28'20.457",
+            "lon": "123°7'50.333",
+            "gpsLat": 39.47234916666667,
+            "gpsLon": 123.13064805555555,
+            "bLat": 39.48005316822516,
+            "bLon": 123.1427056456715
+        }, {
+            "idx": "3",
+            "lat": "39°28'19.214",
+            "lon": "123°6'32.608",
+            "gpsLat": 39.47200388888889,
+            "gpsLon": 123.10905777777778,
+            "bLat": 39.4798384522472,
+            "bLon": 123.12108702854358
+        }];
+
+        var area2Points = [{
+            "idx": "1",
+            "lat": "39°29'59.32",
+            "lon": "123°06'53.20",
+            "gpsLat": 39.499811111111114,
+            "gpsLon": 123.11477777777777,
+            "bLat": 39.507673582064214,
+            "bLon": 123.12682939964463
+        }, {
+            "idx": "1",
+            "lat": "39°29'59.31",
+            "lon": "123°07'05.97",
+            "gpsLat": 39.499808333333334,
+            "gpsLon": 123.118325,
+            "bLat": 39.507660279690654,
+            "bLon": 123.13037847710217
+        }, {
+            "idx": "1",
+            "lat": "39°29'42.38",
+            "lon": "123°07'05.96",
+            "gpsLat": 39.495105555555554,
+            "gpsLon": 123.11832222222222,
+            "bLat": 39.50295542347814,
+            "bLon": 123.13037267143866
+        }, {
+            "idx": "1",
+            "lat": "39°28'35.31",
+            "lon": "123°06'15.19",
+            "gpsLat": 39.476475,
+            "gpsLon": 123.10421944444444,
+            "bLat": 39.484277441979934,
+            "bLon": 123.11626397727208
+        }, {
+            "idx": "1",
+            "lat": "39°28'40.68",
+            "lon": "123°06'09.39",
+            "gpsLat": 39.47796666666667,
+            "gpsLon": 123.10260833333334,
+            "bLat": 39.48575381511996,
+            "bLon": 123.11465927307178
+        }, {
+            "idx": "1",
+            "lat": "39°28'58.70",
+            "lon": "123°06'09.62",
+            "gpsLat": 39.48297222222222,
+            "gpsLon": 123.10267222222222,
+            "bLat": 39.49076317209654,
+            "bLon": 123.11472827418363
+        }];
+
+        var water = [];
+        water[0] = {
+            'temp': 13.082,
+            'salt': 30.747,
+            'chlor': 1.004,
+            'turb': 0.465,
+            'oxy': 6.81,
+            'ph': 7.94,
+            'hydrologySpeed': 35.33,
+            'hydrologyDirection': 181.82
+        };
+        water[1] = {
+            'temp': 12.667,
+            'salt': 30.802,
+            'chlor': 0.966,
+            'turb': 0.465,
+            'oxy': 6.57,
+            'ph': 7.88,
+            'hydrologySpeed': 32.48,
+            'hydrologyDirection': 224.57
+        };
+        water[2] = {
+            'temp': 15.039,
+            'salt': 30.494,
+            'chlor': 0.973,
+            'turb': 0.169,
+            'oxy': 6.56,
+            'ph': 7.97,
+            'hydrologySpeed': 37.36,
+            'hydrologyDirection': 19.72
+        };
+        water[3] = {
+            'temp': 14.669,
+            'salt': 30.557,
+            'chlor': 0.973,
+            'turb': 0.183,
+            'oxy': 6.65,
+            'ph': 7.96,
+            'hydrologySpeed': 32.91,
+            'hydrologyDirection': 19.9
+        };
+        water[4] = {
+            'temp': 14.518,
+            'salt': 29.984,
+            'chlor': 1.02,
+            'turb': 0.197,
+            'oxy': 6.72,
+            'ph': 8.17,
+            'hydrologySpeed': 33.98,
+            'hydrologyDirection': 297.18
+        };
+        water[5] = {
+            'temp': 14.504,
+            'salt': 30.066,
+            'chlor': 0.973,
+            'turb': 0.226,
+            'oxy': 6.89,
+            'ph': 7.97,
+            'hydrologySpeed': 35.73,
+            'hydrologyDirection': 283.17
+        };
+        water[6] = {
+            'temp': 14.346,
+            'salt': 29.978,
+            'chlor': 0.919,
+            'turb': 0.197,
+            'oxy': 6.87,
+            'ph': 8.16,
+            'hydrologySpeed': 32.49,
+            'hydrologyDirection': 70.44
+        };
+        water[7] = {
+            'temp': 14.31,
+            'salt': 30.065,
+            'chlor': 1.081,
+            'turb': 0.31,
+            'oxy': 6.6,
+            'ph': 7.94,
+            'hydrologySpeed': 38.37,
+            'hydrologyDirection': 121.55
+        };
+        water[8] = {
+            'temp': 14.419,
+            'salt': 30.089,
+            'chlor': 1.081,
+            'turb': 0.24,
+            'oxy': 6.7,
+            'ph': 7.91,
+            'hydrologySpeed': 37.19,
+            'hydrologyDirection': 84.16
+        };
+        water[9] = {
+            'temp': 14.391,
+            'salt': 30.071,
+            'chlor': 1.066,
+            'turb': 0.282,
+            'oxy': 6.62,
+            'ph': 8.16,
+            'hydrologySpeed': 32.59,
+            'hydrologyDirection': 30.83
+        };
+        water[10] = {
+            'temp': 14.346,
+            'salt': 30.496,
+            'chlor': 1.058,
+            'turb': 0.155,
+            'oxy': 6.59,
+            'ph': 8.04,
+            'hydrologySpeed': 35.28,
+            'hydrologyDirection': 207.9
+        };
+        water[11] = {
+            'temp': 14.415,
+            'salt': 30.203,
+            'chlor': 1.197,
+            'turb': 0.169,
+            'oxy': 6.76,
+            'ph': 7.94,
+            'hydrologySpeed': 37,
+            'hydrologyDirection': 359.2
+        };
+        water[12] = {
+            'temp': 12.725,
+            'salt': 30.634,
+            'chlor': 0.757,
+            'turb': 0.169,
+            'oxy': 6.65,
+            'ph': 8.01,
+            'hydrologySpeed': 33.23,
+            'hydrologyDirection': 355.07
+        };
+        water[13] = {
+            'temp': 13.296,
+            'salt': 30.521,
+            'chlor': 1.128,
+            'turb': 0.437,
+            'oxy': 6.78,
+            'ph': 7.87,
+            'hydrologySpeed': 37.59,
+            'hydrologyDirection': 252.55
+        };
+        water[14] = {
+            'temp': 12.278,
+            'salt': 30.745,
+            'chlor': 1.877,
+            'turb': 0.381,
+            'oxy': 6.94,
+            'ph': 8.15,
+            'hydrologySpeed': 38.88,
+            'hydrologyDirection': 348.43
+        };
+        water[15] = {
+            'temp': 14.816,
+            'salt': 30.397,
+            'chlor': 1.128,
+            'turb': 0.353,
+            'oxy': 6.72,
+            'ph': 8.17,
+            'hydrologySpeed': 32.39,
+            'hydrologyDirection': 255.25
+        };
+        water[16] = {
+            'temp': 15.482,
+            'salt': 30.267,
+            'chlor': 1.159,
+            'turb': 0.211,
+            'oxy': 6.95,
+            'ph': 8.11,
+            'hydrologySpeed': 35.01,
+            'hydrologyDirection': 290.13
+        };
+        water[17] = {
+            'temp': 14.411,
+            'salt': 29.903,
+            'chlor': 1.638,
+            'turb': 0.296,
+            'oxy': 6.61,
+            'ph': 8.12,
+            'hydrologySpeed': 35.76,
+            'hydrologyDirection': 113.34
+        };
+        water[18] = {
+            'temp': 14.153,
+            'salt': 29.725,
+            'chlor': 1.831,
+            'turb': 0.296,
+            'oxy': 6.59,
+            'ph': 8.11,
+            'hydrologySpeed': 32.12,
+            'hydrologyDirection': 264.07
+        };
+        water[19] = {
+            'temp': 14.437,
+            'salt': 29.876,
+            'chlor': 1.754,
+            'turb': 0.282,
+            'oxy': 6.68,
+            'ph': 8.04,
+            'hydrologySpeed': 34.75,
+            'hydrologyDirection': 71.77
+        };
+        water[20] = {
+            'temp': 14.26,
+            'salt': 29.826,
+            'chlor': 1.661,
+            'turb': 0.268,
+            'oxy': 6.87,
+            'ph': 7.89,
+            'hydrologySpeed': 35.31,
+            'hydrologyDirection': 48.63
+        };
+        water[21] = {
+            'temp': 14.631,
+            'salt': 30.219,
+            'chlor': 1.46,
+            'turb': 0.226,
+            'oxy': 6.67,
+            'ph': 8.08,
+            'hydrologySpeed': 37.21,
+            'hydrologyDirection': 138.43
+        };
+        water[22] = {
+            'temp': 14.378,
+            'salt': 30.257,
+            'chlor': 1.545,
+            'turb': 0.211,
+            'oxy': 6.68,
+            'ph': 7.88,
+            'hydrologySpeed': 38.83,
+            'hydrologyDirection': 96.53
+        };
+        water[23] = {
+            'temp': 14.142,
+            'salt': 30.45,
+            'chlor': 1.491,
+            'turb': 0.31,
+            'oxy': 6.91,
+            'ph': 8.03,
+            'hydrologySpeed': 36.56,
+            'hydrologyDirection': 325.84
+        };
+
+
+        for (var i = 0; i < water.length; i++) {
+            water[i].temp -= 11;
+        }
+
+
+        var data = {
+            energy: {
+                total: 12345,
+                real: 4312,
+                cost: 3144,
+                battery: 888
+            },
+            power: [{"name": "通信设备", "value": "4.3"}, {"name": "视频设备", "value": "1.232"}, {
+                "name": "雷达设备",
+                "value": "0.92"
+            }, {"name": "配电设备", "value": "0.82"}, {"name": "水质设备", "value": "0.71"}, {
+                "name": "气象设备",
+                "value": "0.71"
+            }, {"name": "其他", "value": "0.92"}],
+            powerColor: ['#03FAFC', '#1794F5', '#19D39E', '#25B346', '#87CD00', '#E8F517', '#F59A17', '#6859FF'],
+            powerTotal: 12816,
+            water: {
+                temp: 20,
+                salt: 56,
+                oxy: 9,
+                ph: 3,
+                turb: 389,
+                chlor: 312,
+                hydrologySpeed: 40,
+                hydrologyDirection: 120
+            },
+            waterMax: {
+                temp: 45,
+                salt: 70,
+                oxy: 20,
+                ph: 14,
+                turb: 1,
+                chlor: 3
+            },
+            weather: {
+                temp: 10.3,
+                pres: 100,
+                humidity: 46.4,
+                windSpeed: 104,
+                windDirection: 130
+            },
+
+            map: {
+                point: {
+                    lon: 122.30369715743528,
+                    lat: 39.20728124984779
+                },
+                colors: {
+                    // 投石区
+                    type1: '#A167EF',
+                    // 底播区
+                    type2: '#0261FA',
+                    // 浮法区
+                    type3: '#03F9FC',
+                    // 垂钓区
+                    type4: '#FE5D96'
+                },
+                areas: [
+                    {
+                        type: 'type1',
+                        n: 38.860088,
+                        w: 121.637879,
+                        s: 38.858508,
+                        e: 121.639874
+                    },
+                    {
+                        type: 'type2',
+                        n: 38.861093,
+                        w: 121.635355,
+                        s: 38.860032,
+                        e: 121.637466
+                    },
+                    {
+                        type: 'type3',
+                        n: 38.86058,
+                        w: 121.633675,
+                        s: 38.859934,
+                        e: 121.635148
+                    },
+                    {
+                        type: 'type4',
+                        n: 38.860776,
+                        w: 121.63964,
+                        s: 38.859161,
+                        e: 121.64088
+                    }
+                ]
+            }
+        };
+
+        function calcEnergy() {
+            var startDate = "2020-06-10";
+
+            var dateStart = new Date(startDate);
+            var dateEnd = new Date();
+            var day = parseInt((dateEnd - dateStart) / (1000 * 60 * 60 * 24));
+
+            var base = day * 19200;
+
+            var today = formatTime(dateEnd, 'yyyy-MM-dd');
+            var timeStart = new Date(today + " 07:30:00").getTime() / 1000;
+            var timeEnd = new Date(today + " 17:30:00").getTime() / 1000;
+            var dayStart = new Date(today + " 00:00:00").getTime() / 1000;
+
+            var now = dateEnd.getTime() / 1000;
+
+            var total = 0;
+            var real = 0;
+            var cost = 0;
+            var battery = 0;
+
+
+            var t1 = 0;
+
+            if (now < timeStart) {
+                total = base;
+                real = 0;
+            } else if (now > timeEnd) {
+                total = base + 19200;
+                real = 0;
+            } else {
+                total = parseInt(base + (now - timeStart) * 32 / 60);
+                real = parseInt(32 * (1 + -0.1 + Math.random() * 0.2));
+                t1 = (now - timeStart) / 60;
+            }
+
+            var t2 = (now - dayStart) / 60;
+
+            cost = (8.9 * (1 + -0.1 + Math.random() * 0.2)).toFixed(1);
+            battery = (9600 * 0.7 + 32 * t1 - 8.9 * t2).toFixed(0);
+
+
+            data.energy.total = total;
+            data.energy.real = real;
+            data.energy.cost = cost;
+            data.energy.battery = battery;
+
+
+            data.powerTotal = (8.9 * t2).toFixed(0);
+
+
+        }
+
+        function calcWater() {
+            var hour = new Date().getHours();
+
+            data.water = water[hour];
+        }
+
+        var weatherMin = -1;
+
+
+        function calcWeather() {
+            var m = new Date().getMinutes();
+
+            if (m != weatherMin) {
+                $.ajax({
+                    //api.djapi.cn/rtweather2/get?citycode=101161010&cityname_ch=&cityname_py=&ip=&jwd=&cn_to_unicode=1&token=9f2d610a0d************5940a173e6&datatype=json
+                    url: "https://api.djapi.cn/rtweather2/get?citycode=101070201&cityname_ch=&cityname_py=&ip=&jwd=&cn_to_unicode=1&token=4f2ad252be628a80f6cd7cfea1301bf0&datatype=json",
+                    type: 'GET',
+                    dataType: "json",
+                    data: {},
+                    success: function (res) {
+                        var now = res.Result;
+                        weatherMin = m;
+
+                        data.weather = {
+                            temp: now.Temp.Sheshi.Code,
+                            pres: now.QiYa.Code,
+                            humidity: now.Wet.replace("%", ""),
+                            windSpeed: now.Wind.SpeedHtml.replace("km/h", ""),
+                            windDirection: now.Wind.Direction
+                        };
+
+                        for (var i in data.weather) {
+                            $("#weather_" + i).text(data.weather[i]);
+                        }
+                    },
+                    error: function () {
+
+                        for (var i in data.weather) {
+                            $("#weather_" + i).text(data.weather[i]);
+                        }
+                    }
+                });
+            }
+
+
+        }
+
+
+        function refreshData() {
+
+            async('/dashboard3/realtime/data', {
+                id: 6
+            }, function (res) {
+                var map = res.result;
+
+                var cost = 0;
+
+                for (var i = 0; i < data.power.length; i++) {
+                    cost += parseFloat(data.power[i].value);
+                }
+                data.energy.total = map['power.generation.total'];
+                data.energy.real = map['power.generation.realtime'];
+                data.energy.cost = (cost * (1 + -0.1 + Math.random() * 0.2)).toFixed(1);
+                data.energy.battery = map['power.charging.capacity'];
+
+                var d = new Date();
+                var now = d.getTime() / 1000;
+
+                var today = formatTime(d, 'yyyy/MM/dd');
+                var dayStart = new Date(today + " 00:00:00").getTime() / 1000;
+
+                var t2 = (now - dayStart) / 60;
+
+                data.powerTotal = (cost * t2).toFixed(0);
+                data.water = {
+                    temp: map['water.quality.temp'],
+                    salt: map['water.quality.salt'],
+                    chlor: map['water.quality.chlor'],
+                    turb: map['water.quality.turb'],
+                    oxy: map['water.quality.oxy'],
+                    ph: map['water.quality.ph'],
+                    hydrologySpeed: map['water.current.velocity'],
+                    hydrologyDirection: map['water.current.direction']
+                };
+
+
+                data.weather = {
+                    temp: map['weather.air.temp'],
+                    pres: map['weather.air.pressure'],
+                    humidity: map['weather.air.humidity'],
+                    windSpeed: map['weather.wind.velocity'],
+                    windDirection: map['weather.wind.direction']
+
+                };
+
+                reloadPage();
+            }, false, false);
+        }
+
+        var loaded = true;
+
+        function reloadPage() {
+
+            /*
+            calcEnergy();
+            calcWater();
+            calcWeather();
+            */
+            // calcWeather();
+            //
+            // for (var i in data.weather) {
+            //     $("#weather_" + i).text(data.weather[i]);
+            // }
+
+            for (var i in data.energy) {
+                $("#energy_" + i).text(data.energy[i]);
+            }
+
+            $("#power_total").text(data.powerTotal);
+
+
+            var hydrologySpeedOptions = {
+                tooltip: {
+                    formatter: '{a} <br/>{c} {b}'
+                },
+                series: [
+                    {
+                        name: '海流流速',
+                        type: 'gauge',
+                        min: 0,
+                        max: 600,
+                        splitNumber: 10,
+                        radius: '100%',
+                        axisLine: {            // 坐标轴线
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                color: [[0.2, 'lime'], [0.8, '#1e90ff'], [1, '#ff4500']],
+                                width: 2,
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        axisLabel: {            // 坐标轴小标记
+                            fontWeight: 'bolder',
+                            color: '#fff',
+                            shadowColor: '#fff', //默认透明
+                            shadowBlur: 10
+                        },
+                        axisTick: {            // 坐标轴小标记
+                            length: 10,        // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                color: 'auto',
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        splitLine: {           // 分隔线
+                            length: 15,         // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                                width: 3,
+                                color: '#fff',
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        pointer: {           // 分隔线
+                            shadowColor: '#fff', //默认透明
+                            shadowBlur: 5
+                        },
+                        title: {
+                            textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                fontWeight: 'bolder',
+                                fontSize: 16,
+                                fontStyle: 'italic',
+                                color: '#fff',
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        detail: {
+                            backgroundColor: 'rgba(30,144,255,0.8)',
+                            borderWidth: 1,
+                            borderColor: '#fff',
+                            shadowColor: '#fff', //默认透明
+                            shadowBlur: 5,
+                            offsetCenter: [0, '50%'],       // x, y，单位px
+                            textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                fontWeight: 'bolder',
+                                color: '#fff',
+                                fontSize: 18
+                            }
+                        },
+                        data: [{value:126, name: 'cm/s'}]
+                    }
+                ]
+            };
+            hydrologySpeedChart.setOption(hydrologySpeedOptions);
+
+
+            var hydrologyDirectionOptions = {
+                tooltip: {
+                    formatter: '{a} <br/>{c} {b}'
+                },
+                series: [
+                    {
+                        name: '海流流向',
+                        type: 'gauge',
+                        min: 0,
+                        max: 360,
+                        splitNumber: 10,
+                        radius: '100%',
+                        axisLine: {            // 坐标轴线
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                color: [[0.2, 'lime'], [0.8, '#1e90ff'], [1, '#ff4500']],
+                                width: 2,
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        axisLabel: {            // 坐标轴小标记
+                            fontWeight: 'bolder',
+                            color: '#fff',
+                            shadowColor: '#fff', //默认透明
+                            shadowBlur: 10
+                        },
+                        axisTick: {            // 坐标轴小标记
+                            length: 10,        // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                color: 'auto',
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        splitLine: {           // 分隔线
+                            length: 15,         // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                                width: 3,
+                                color: '#fff',
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        pointer: {           // 分隔线
+                            shadowColor: '#fff', //默认透明
+                            shadowBlur: 5
+                        },
+                        title: {
+                            textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                fontWeight: 'bolder',
+                                fontSize: 20,
+                                fontStyle: 'italic',
+                                color: '#fff',
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        detail: {
+                            backgroundColor: 'rgba(30,144,255,0.8)',
+                            borderWidth: 1,
+                            borderColor: '#fff',
+                            shadowColor: '#fff', //默认透明
+                            shadowBlur: 5,
+                            offsetCenter: [0, '50%'],       // x, y，单位px
+                            textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                fontWeight: 'bolder',
+                                color: '#fff',
+                                fontSize: 18
+                            }
+                        },
+                        data: [{value: 37, name: '°'}]
+                    }
+                ]
+            };
+
+
+            hydrologyDirectionChart.setOption(hydrologyDirectionOptions);
+
+
+            for (var i in data.water) {
+                var v = data.water[i];
+                var m = data.waterMax[i];
+
+                var p = parseFloat(v / m * 100).toFixed(2);
+
+                $("#water_" + i + "_txt").text(v);
+                $("#water_" + i + "_per").animate({width: p + "%"}, "fast");
+            }
+
+        }
+
+        var hydrologySpeedChart;
+        var hydrologyDirectionChart;
+
+        function getQueryVariable (variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] === variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            return null;
+        }
+
+
+        $(function () {
+            var name = getQueryVariable("name");
+            if(name == null) {
+                name = "大连海洋大学海洋牧场示范区";
+            }
+            $("#pageName").html(name);
+            $("#realtime").attr("href", "realtime.html?name="+name);
+            $("#history").attr("href", "history.html?name="+name);
+            $("#resource").attr("href", "resource.html?name="+name);
+            setInterval(function () {
+                var left = parseInt($(".wave").eq(0).css("left"));
+                if (left == 0) {
+                    left = -36;
+                }
+
+                left++;
+
+                $(".wave").css("left", left + "px");
+
+            }, 50);
+
+            // setInterval(function () {
+            //     refreshData();
+            //     // }, 5000);
+            // }, 600000);
+
+
+            hydrologySpeedChart = echarts.init(document.getElementById('hydrology_speed'));
+            hydrologyDirectionChart = echarts.init(document.getElementById('hydrology_direction'));
+
+
+            var hydrologySpeedOptions = {
+                tooltip: {
+                    formatter: '{a} <br/>{c} {b}'
+                },
+                series: [
+                    {
+                        name: '海流流速',
+                        type: 'gauge',
+                        min: 0,
+                        max: 600,
+                        splitNumber: 10,
+                        radius: '100%',
+                        axisLine: {            // 坐标轴线
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                color: [[0.2, 'lime'], [0.8, '#1e90ff'], [1, '#ff4500']],
+                                width: 2,
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        axisLabel: {            // 坐标轴小标记
+                            fontWeight: 'bolder',
+                            color: '#fff',
+                            shadowColor: '#fff', //默认透明
+                            shadowBlur: 10
+                        },
+                        axisTick: {            // 坐标轴小标记
+                            length: 10,        // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                color: 'auto',
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        splitLine: {           // 分隔线
+                            length: 15,         // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                                width: 3,
+                                color: '#fff',
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        pointer: {           // 分隔线
+                            shadowColor: '#fff', //默认透明
+                            shadowBlur: 5
+                        },
+                        title: {
+                            textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                fontWeight: 'bolder',
+                                fontSize: 16,
+                                fontStyle: 'italic',
+                                color: '#fff',
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        detail: {
+                            backgroundColor: 'rgba(30,144,255,0.8)',
+                            borderWidth: 1,
+                            borderColor: '#fff',
+                            shadowColor: '#fff', //默认透明
+                            shadowBlur: 5,
+                            offsetCenter: [0, '50%'],       // x, y，单位px
+                            textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                fontWeight: 'bolder',
+                                color: '#fff',
+                                fontSize: 18
+                            }
+                        },
+                        data: [{value:126, name: 'cm/s'}]
+                    }
+                ]
+            };
+            hydrologySpeedChart.setOption(hydrologySpeedOptions);
+
+
+            var hydrologyDirectionOptions = {
+                tooltip: {
+                    formatter: '{a} <br/>{c} {b}'
+                },
+                series: [
+                    {
+                        name: '海流流向',
+                        type: 'gauge',
+                        min: 0,
+                        max: 360,
+                        splitNumber: 10,
+                        radius: '100%',
+                        axisLine: {            // 坐标轴线
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                color: [[0.2, 'lime'], [0.8, '#1e90ff'], [1, '#ff4500']],
+                                width: 2,
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        axisLabel: {            // 坐标轴小标记
+                            fontWeight: 'bolder',
+                            color: '#fff',
+                            shadowColor: '#fff', //默认透明
+                            shadowBlur: 10
+                        },
+                        axisTick: {            // 坐标轴小标记
+                            length: 10,        // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                color: 'auto',
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        splitLine: {           // 分隔线
+                            length: 15,         // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                                width: 3,
+                                color: '#fff',
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        pointer: {           // 分隔线
+                            shadowColor: '#fff', //默认透明
+                            shadowBlur: 5
+                        },
+                        title: {
+                            textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                fontWeight: 'bolder',
+                                fontSize: 20,
+                                fontStyle: 'italic',
+                                color: '#fff',
+                                shadowColor: '#fff', //默认透明
+                                shadowBlur: 10
+                            }
+                        },
+                        detail: {
+                            backgroundColor: 'rgba(30,144,255,0.8)',
+                            borderWidth: 1,
+                            borderColor: '#fff',
+                            shadowColor: '#fff', //默认透明
+                            shadowBlur: 5,
+                            offsetCenter: [0, '50%'],       // x, y，单位px
+                            textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                fontWeight: 'bolder',
+                                color: '#fff',
+                                fontSize: 18
+                            }
+                        },
+                        data: [{value: 37, name: '°'}]
+                    }
+                ]
+            };
+
+
+            hydrologyDirectionChart.setOption(hydrologyDirectionOptions);
+
+
+            // setTimeout(refreshData, 600);
+
+
+            var powerPieChart = echarts.init(document.getElementById('power_pie_chart'));
+
+
+            var powerPieOptions = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b}: {c} ({d}%)'
+                },
+                series: [
+                    {
+                        name: '设备耗电量',
+                        type: 'pie',
+                        radius: ['70%', '100%'],
+                        label: {
+                            show: false
+                        },
+                        hoverAnimation: false,
+                        color: data.powerColor,
+                        data: data.power
+                    }
+                ]
+            };
+
+            powerPieChart.setOption(powerPieOptions);
+
+            var total = 0;
+            data.power.forEach(function (i) {
+                total += parseFloat(i.value);
+            });
+
+
+            for (var i = 0; i < data.power.length; i++) {
+                /*
+
+                            <div class="item">
+                                <div class="progress-bar">
+                                    <div class="progress"></div>
+                                </div>
+                                <div class="txt"></div>
+                                <div class="name">通信设备</div>
+                            </div>
+                */
+                var color = data.powerColor[i];
+                var item = data.power[i];
+                var percent = parseFloat(item.value / total * 100).toFixed(2);
+
+
+                var el = $('<div class="item">');
+
+                var pbar = $('<div class="progress-bar">');
+                el.append(pbar);
+
+                var pro = $('<div class="progress">')
+                pro.css("width", percent * 2 + "%");
+                pro.css("background", color);
+                pbar.append(pro);
+
+                el.append('<div class="txt">' + percent + '%</div>');
+                el.append('<div class="name">' + item.name + '</div>');
+
+                $(".power-charts .percent").append(el);
+            }
+
+            var point = new BMap.Point(123.08051170059053, 39.484397178561586);
+            var center = new BMap.Point(123.08051170059053, 39.484397178561586);
+
+            var map = new BMap.Map("map", {maxZoom: 13});    // 创建Map实例
+            map.setMapType(BMAP_HYBRID_MAP);
+            map.centerAndZoom(center, 13);  // 初始化地图,设置中心点坐标和地图级别
+            map.setCurrentCity("大连");          // 设置地图显示的城市 此项是必须设置的
+            map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+            var ico = new BMap.Icon("images/ico_loc.png", new BMap.Size(43, 53));
+            var marker = new BMap.Marker(point, {icon: ico});  // 创建标注
+            map.addOverlay(marker);               // 将标注添加到地图中
+            marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+
+            /*
+                var color = data.map.colors.type3;
+
+                var polygon = [];
+                for (var i = 0; i < areaPoints.length; i++) {
+                    polygon.push(new BMap.Point(areaPoints[i].bLon, areaPoints[i].bLat));
+                }
+                var polygon = new BMap.Polygon(polygon, {strokeColor: color, fillColor:color, strokeWeight:2, fillOpacity:0.3});  //创建多边形
+                map.addOverlay(polygon);   //增加多边形
+
+
+
+                var color = data.map.colors.type4;
+
+                var polygon = [];
+                for (var i = 0; i < area2Points.length; i++) {
+                    polygon.push(new BMap.Point(area2Points[i].bLon, area2Points[i].bLat));
+                }
+                var polygon = new BMap.Polygon(polygon, {strokeColor: color, fillColor:color, strokeWeight:2, fillOpacity:0.3});  //创建多边形
+                map.addOverlay(polygon);   //增加多边形
+            */
+
+
+            var color = data.map.colors.type3;
+
+            var p1 = {};
+            for (var i = 0; i < areaPoints.length; i++) {
+                var p = areaPoints[i];
+                if (!p1['idx_' + p.idx]) {
+                    p1['idx_' + p.idx] = [];
+                }
+                p1['idx_' + p.idx].push(p);
+            }
+
+            for (var i in p1) {
+
+                var polygon = [];
+                for (var j = 0; j < p1[i].length; j++) {
+                    polygon.push(new BMap.Point(p1[i][j].bLon, p1[i][j].bLat));
+                }
+                var polygon = new BMap.Polygon(polygon, {
+                    strokeColor: color,
+                    fillColor: color,
+                    strokeWeight: 2,
+                    fillOpacity: 0.3
+                });  //创建多边形
+                map.addOverlay(polygon);   //增加多边形
+            }
+
+
+            var color = data.map.colors.type4;
+
+
+            var p2 = {};
+            for (var i = 0; i < area2Points.length; i++) {
+                var p = area2Points[i];
+                if (!p2['idx_' + p.idx]) {
+                    p2['idx_' + p.idx] = [];
+                }
+                p2['idx_' + p.idx].push(p);
+            }
+
+
+            for (var i in p2) {
+
+                var polygon = [];
+                for (var j = 0; j < p2[i].length; j++) {
+                    polygon.push(new BMap.Point(p2[i][j].bLon, p2[i][j].bLat));
+                }
+                var polygon = new BMap.Polygon(polygon, {
+                    strokeColor: color,
+                    fillColor: color,
+                    strokeWeight: 2,
+                    fillOpacity: 0.3
+                });  //创建多边形
+                map.addOverlay(polygon);   //增加多边形
+            }
+
+
+        });
+
+        function drawPolygon(map, i) {
+            var color = data.map.colors[i.type];
+            var polygon = new BMap.Polygon([
+                new BMap.Point(i.w, i.n),
+                new BMap.Point(i.e, i.n),
+                new BMap.Point(i.e, i.s),
+                new BMap.Point(i.w, i.s)
+            ], {strokeColor: color, fillColor: color, strokeWeight: 2, fillOpacity: 0.3});  //创建多边形
+            map.addOverlay(polygon);   //增加多边形
+        }
+    </script>
+
+</head>
+
+<body class="dashboard">
+
+
+<div class="page-title">
+    <h1 id="pageName">大连市王家岛海域富谷国家级海洋牧场示范区</h1>
+    <h2>多功能信息监测管理平台</h2>
+</div>
+<div class="nav">
+    <div class="date">
+        <ul>
+            <li class="num date-year">2</li>
+            <li class="num date-year">0</li>
+            <li class="num date-year">2</li>
+            <li class="num date-year">0</li>
+            <li class="txt">年</li>
+            <li class="num date-month">0</li>
+            <li class="num date-month">5</li>
+            <li class="txt">月</li>
+            <li class="num date-day">0</li>
+            <li class="num date-day">5</li>
+            <li class="txt">日</li>
+            <li class="txt luna date-lunar"></li>
+
+            <li class="txt time date-time">00:00</li>
+
+        </ul>
+    </div>
+    <div class="tabs">
+        <a href="realtime.html" id="realtime" class="ico-real on">实时监测</a>
+        <a href="history.html" id="history" class="ico-his ">历史数据</a>
+
+        <a href="#" class="ico-warn ">预报预警</a>
+
+        <a href="resource.html" id="resource" class="ico-res ">资源评估</a>
+
+        <a href="main.html" class="ico-intro">牧场概况</a>
+
+    </div>
+</div>
+
+<div class="data">
+    <div class="left">
+        <div class="power">
+            <div class="item color-1">
+                <div class="title"><span class="dot"></span>累计发电量</div>
+                <div class="bg">
+                    <div class="border">
+                        <div class="txt counter" id="energy_total">253115.6</div>
+                        <div class="wave"></div>
+                        <div class="ico"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="item color-2">
+                <div class="title"><span class="dot"></span>实时发电量</div>
+                <div class="bg">
+                    <div class="border">
+                        <div class="txt counter" id="energy_real">12148.2</div>
+                        <div class="wave"></div>
+                        <div class="ico"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="item color-3">
+                <div class="title"><span class="dot"></span>实时用电量</div>
+                <div class="bg">
+                    <div class="border">
+                        <div class="txt counter" id="energy_cost">11.3</div>
+                        <div class="wave"></div>
+                        <div class="ico"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="item color-4">
+                <div class="title"><span class="dot"></span>累计充电量</div>
+                <div class="bg">
+                    <div class="border">
+                        <div class="txt counter" id="energy_battery">13583.6</div>
+                        <div class="wave"></div>
+                        <div class="ico"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="power-charts">
+            <h3>设备耗电量</h3>
+            <div class="pie">
+                <div class="bg"></div>
+                <div id="power_pie_chart">
+                </div>
+                <div class="txt">
+                    <p id="power_total" class="counter">15277</p>
+                    <span>耗电总量</span>
+                </div>
+            </div>
+            <div class="percent">
+            </div>
+        </div>
+    </div>
+
+    <div class="map">
+        <div class="border">
+        </div>
+        <div class="border-lt"></div>
+        <div class="border-rt"></div>
+        <div class="border-lb"></div>
+        <div class="border-rb"></div>
+        <div class="inner">
+            <div id="map">
+            </div>
+            <div class="infos">
+                示范区位置：39°28'37.948 N, 123°4'5.981 E &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;示范区面积：709公顷
+            </div>
+            <div class="tips">
+                <div class="item loc">示范区位置</div>
+                <div class="item"><span class="rect color-3"></span>界址</div>
+                <div class="item"><span class="rect color-4"></span>人工鱼礁区</div>
+                <!--
+                <div class="item loc">监测点</div>
+                <div class="item"><span class="rect color-1"></span>投石区</div>
+                <div class="item"><span class="rect color-2"></span>底播区</div>
+                <div class="item"><span class="rect color-3"></span>浮法区</div>
+                <div class="item"><span class="rect color-4"></span>垂钓区</div>
+                -->
+            </div>
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="weather">
+            <h3>气象信息</h3>
+            <div class="inner">
+                <div class="item">
+                    <div class="label ico-temp">空气温度</div>
+                    <div class="txt"><span id="weather_temp">19.5</span><sub>℃</sub></div>
+                </div>
+                <div class="item">
+                    <div class="label ico-pres">大气压强</div>
+                    <div class="txt"><span id="weather_pres">1010.0</span><sub>mb</sub></div>
+                </div>
+                <div class="item">
+                    <div class="label ico-humi">相对湿度</div>
+                    <div class="txt"><span id="weather_humidity">56.9</span><sub>%</sub></div>
+                </div>
+                <div class="item">
+                    <div class="label ico-wind-s">风速</div>
+                    <div class="txt"><span id="weather_windSpeed">0.3</span><sub>km/h</sub></div>
+                </div>
+                <div class="item">
+                    <div class="label ico-wind-d">风向</div>
+                    <div class="txt"><span id="weather_windDirection">74.2</span><sup></sup></div>
+                </div>
+            </div>
+        </div>
+        <div class="hydrology">
+            <h3>水<br/>文<br/>信<br/>息</h3>
+            <div class="charts">
+                <div class="item">
+                    <div id="hydrology_speed"></div>
+                    <div class="txt">海流流速</div>
+                </div>
+                <div class="item">
+                    <div id="hydrology_direction"></div>
+                    <div class="txt">海流流向</div>
+                </div>
+            </div>
+        </div>
+        <div class="water">
+            <h3>水质信息</h3>
+            <div class="items">
+                <div class="item">
+                    <div class="label">水温</div>
+                    <div class="value"><span id="water_temp_txt">0.5</span><sub>℃</sub></div>
+                    <div class="progress-bar color-1">
+                        <div class="progress" id="water_temp_per"></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="label">盐度</div>
+                    <div class="value"><span id="water_salt_txt">29.44</span><sub>PSU</sub></div>
+                    <div class="progress-bar color-2">
+                        <div class="progress" id="water_salt_per"></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="label">溶解氧</div>
+                    <div class="value"><span id="water_oxy_txt">8.79</span><sub>mg/L</sub></div>
+                    <div class="progress-bar color-3">
+                        <div class="progress" id="water_oxy_per"></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="label">pH</div>
+                    <div class="value"><span id="water_ph_txt">8.15</span><sub>pH</sub></div>
+                    <div class="progress-bar color-4">
+                        <div class="progress" id="water_ph_per"></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="label">浊度</div>
+                    <div class="value"><span id="water_turb_txt">0.42</span><sub>NTU</sub></div>
+                    <div class="progress-bar color-5">
+                        <div class="progress" id="water_turb_per"></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="label">叶绿素</div>
+                    <div class="value"><span id="water_chlor_txt">0</span><sub>μg/L</sub></div>
+                    <div class="progress-bar color-6">
+                        <div class="progress" id="water_chlor_per"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="video">
+    <h3>牧<br/>场<br/>实<br/>时<br/>视<br/>频</h3>
+    <div class="item">
+        <video src="video/ad9006115f7243c9bbc65892fa68d73e.mp4" loop autoplay muted
+               controls="false"></video>
+    </div>
+    <div class="item">
+        <video src="video/1ef23f7bb0a144c4baea8804164c6b27.mp4" loop autoplay muted
+               controls="false"></video>
+    </div>
+    <div class="item">
+        <video src="video/d583ccb8486d4ad3bcdf6076075d81d7.mp4" loop autoplay muted
+               controls="false"></video>
+    </div>
+    <div class="item">
+        <video src="video/6a9a4ce6ea9e4169beb4dd6233e42c31.mp4" loop autoplay muted
+               controls="false"></video>
+    </div>
+    <div class="item">
+        <video src="video/e0a54b3b8c534e55b69ac40fb210e122.mp4" loop autoplay muted
+               controls="false"></video>
+    </div>
+</div>
+
+</body>
+</html>

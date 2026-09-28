@@ -1,0 +1,812 @@
+<!doctype html>
+<html>
+<head>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="">
+    <meta name="description" content="">
+    <title>海洋牧场</title>
+
+
+    <link href="style/dashboard.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/screenfull.min.js"></script>
+    <script type="text/javascript" src="js/jquery.1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/jquery.waypoints.min.js"></script>
+    <script type="text/javascript" src="js/jquery.counterup.min.js"></script>
+    <script type="text/javascript" src="js/lunar.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+
+    <script type="text/javascript">
+        var BASE_URL = "/";
+
+    </script>
+    <link href="style/main.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript"
+            src="https://api.map.baidu.com/api?v=2.0&amp;ak=cMGdPFqtybi0WTbcpdpGdxvKqZL2hdLe"></script>
+    <script type="text/javascript" src="js/points.js"></script>
+    <script type="text/javascript" src="js/InfoBox.js"></script>
+
+    <style type="text/css">.BMap_cpyCtrl {
+        display: none;
+    }
+
+    .anchorBL {
+        display: none;
+    }
+
+    .infoBox img {
+        display: none;
+    }
+
+    .intro ul {
+        list-style: circle;
+        margin-left: 40px;
+    }
+
+    .bg-ico-1,
+    .bg-ico-2,
+    .bg-ico-3,
+    .bg-ico-4 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-position: center;
+        background-size: 50% auto;
+        background-repeat: no-repeat;
+    }
+
+
+    .bg-ico-1 {
+        background-image: url("images/main_ico_1.png");
+    }
+
+    .bg-ico-2 {
+        background-image: url("images/main_ico_2.png");
+    }
+
+    .bg-ico-3 {
+        background-image: url("images/main_ico_3.png");
+    }
+
+    .bg-ico-4 {
+        background-image: url("images/main_ico_4.png");
+    }
+    </style>
+
+    <script type="text/javascript">
+
+        var data = {
+            areaCons: [
+                ['area', '国家级', '市级'],
+                ['长海县', 14, 2],
+                ['金普新区', 4, 1],
+                ['庄河', 3, 1],
+                ['增殖型', 15, 4],
+                ['养护型', 3, 0],
+                ['休闲型', 3, 0]
+            ],
+            country: [
+                {value: 6, name: '已建'},
+                {value: 8, name: '在建'},
+                {value: 7, name: '未建'}
+            ],
+            city: [
+                {value: 3, name: '已建'},
+                {value: 1, name: '在建'},
+                {value: 0, name: '未建'}
+            ],
+        };
+
+
+        $(function () {
+
+
+            var areaChart = echarts.init(document.getElementById('area_chart'));
+
+
+            var areaOptions = {
+                legend: {
+                    show: true,
+                    right: 20,
+                    textStyle: {
+                        color: '#FFFFFF'
+                    }
+                },
+                grid: {
+                    top: 30,
+                    left: 30,
+                    right: 0,
+                    bottom: 30
+                },
+                tooltip: {},
+                dataset: {
+                    source: data.areaCons
+                },
+                xAxis: {
+                    type: 'category',
+                    axisLine: {
+                        lineStyle: {
+                            color: '#7CD4FE'
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    }
+                },
+                yAxis: {
+                    axisLabel: {
+                        color: '#7CD4FE'
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: 'rgba(135, 210, 246, 0.4)'
+                        }
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    }
+                },
+
+
+                series: [
+                    {
+                        type: 'bar',
+                        barWidth: 16,
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#FFEC8A'},
+                                    {offset: 1, color: '#FADC42'}
+                                ]
+                            ),
+                            barBorderRadius: [8, 8, 0, 0]
+                        }
+
+                    },
+                    {
+                        type: 'bar',
+                        barWidth: 16,
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {offset: 0, color: '#2BA5F7'},
+                                    {offset: 1, color: '#1B92E1'}
+                                ]
+                            ),
+                            barBorderRadius: [8, 8, 0, 0]
+                        }
+
+                    }
+                ]
+            };
+
+            areaChart.setOption(areaOptions);
+
+            var countryChart = echarts.init(document.getElementById('country_chart'));
+
+
+            var countryOptions = {
+                legend: {
+                    orient: 'vertical',
+                    textStyle: {
+                        color: '#FFFFFF'
+                    },
+                    left: 0,
+                    top: 20,
+                    itemGap: 25,
+                    data: ['已建', '在建', '未建']
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b}: {c} ({d}%)'
+                },
+                series: [
+                    {
+                        name: '国家级',
+                        type: 'pie',
+                        radius: ['70%', '100%'],
+                        label: {
+                            show: false
+                        },
+                        left: 70,
+                        right: 10,
+                        hoverAnimation: false,
+                        color: ['#00C9D0', '#E56E34', '#FADC42'],
+                        data: data.country
+                    }
+                ]
+            };
+
+            countryChart.setOption(countryOptions);
+
+
+            var cityChart = echarts.init(document.getElementById('city_chart'));
+
+
+            var cityOptions = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b}: {c} ({d}%)'
+                },
+                legend: {
+                    orient: 'vertical',
+                    textStyle: {
+                        color: '#FFFFFF'
+                    },
+                    itemGap: 25,
+                    right: 0,
+                    top: 20,
+                    data: ['已建', '在建', '未建']
+                },
+                series: [
+                    {
+                        name: '市级',
+                        type: 'pie',
+                        radius: ['70%', '100%'],
+                        label: {
+                            show: false
+                        },
+                        right: 70,
+                        left: 10,
+                        hoverAnimation: false,
+                        color: ['#FF7444', '#7EFF7B', '#6858FF'],
+                        data: data.city
+                    }
+                ]
+            };
+
+            cityChart.setOption(cityOptions);
+
+
+            var countryTotal = 0;
+            var cityTotal = 0;
+
+            data.country.forEach(function (i) {
+                countryTotal += i.value;
+            });
+
+            data.city.forEach(function (i) {
+                cityTotal += i.value;
+            });
+
+            $("#country_total").text(countryTotal);
+            $("#city_total").text(cityTotal);
+
+
+            var data1 = [4139.587, 4403.9, 3182.26, 4325.02];
+            var data2 = [330885.9, 321329.4, 228719.2, 309309.7];
+            var data3 = [4313.03, 3405.51, 3233.49, 2281.45];
+            var data4 = [46080.96, 42467.77, 31108.51, 29258.31];
+
+
+            var profChart = echarts.init(document.getElementById('prof_chart'));
+
+            var profOptions = {
+                legend: {
+                    show: true,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 10
+                    },
+                    padding: 0,
+                    itemWidth: 15,
+                    itemHeight: 10,
+                    itemGap: 4
+                },
+                tooltip: {
+
+                    trigger: 'axis',
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['2016年', '2017年', '2018年', '2019年'],
+                    boundaryGap: false,
+                    axisLine: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        color: '#00F4FC'
+                    }
+                },
+                yAxis: [{
+                    type: 'value',
+                    min: 2000,
+                    max: 5000,
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: 'rgba(60, 181, 252, 0.1)'
+                        }
+                    },
+                    axisLabel: {
+                        color: '#00F4FC'
+                    },
+                    z: 10
+                }, {
+                    type: 'value',
+                    show: false,
+                    min: 200000,
+                    max: 400000,
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    },
+                    axisLabel: {
+                        inside: true,
+                        color: '#00F4FC'
+                    },
+                    z: 10
+                }, {
+                    type: 'value',
+                    min: 20000,
+                    max: 50000,
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    },
+                    axisLabel: {
+                        color: '#00F4FC'
+                    },
+                    z: 10
+                }
+                ],
+                grid: {
+                    top: 30,
+                    left: 45,
+                    right: 55,
+                    height: 170,
+                },
+                series: [
+                    {
+                        name: '资金投入（万元）',
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'emptyCircle',
+                        symbolSize: 10,
+                        itemStyle: {
+                            color: '#FF535F'
+                        },
+                        areaStyle: {
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [{
+                                    offset: 0, color: 'rgba(255, 115, 0, 1)'
+                                }, {
+                                    offset: 0.5, color: 'rgba(255, 115, 0, 0.3)'
+                                }, {
+                                    offset: 1, color: 'rgba(255, 115, 0, 0)'
+                                }]
+                            },
+                            origin: 'start'
+                        },
+                        data: data1,
+                        z: 20
+                    },
+                    {
+                        name: '放流规模（万尾）',
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'emptyCircle',
+                        symbolSize: 10,
+                        yAxisIndex: 1,
+                        itemStyle: {
+                            color: 'rgba(253, 228, 103, 1)'
+                        },
+                        areaStyle: {
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [{
+                                    offset: 0, color: 'rgba(253, 228, 103, 1)'
+                                }, {
+                                    offset: 0.5, color: 'rgba(253, 228, 103, 0.3)'
+                                }, {
+                                    offset: 1, color: 'rgba(253, 228, 103, 0)'
+                                }]
+                            },
+                            origin: 'start'
+                        },
+                        data: data2,
+                        z: 10
+                    },
+                    {
+                        name: '回捕产量（吨）',
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'emptyCircle',
+                        symbolSize: 10,
+                        yAxisIndex: 0,
+                        itemStyle: {
+                            color: '#00D0D8'
+                        },
+                        areaStyle: {
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [{
+                                    offset: 0, color: 'rgba(0, 208, 216, 1)'
+                                }, {
+                                    offset: 0.5, color: 'rgba(0, 208, 216, 0.3)'
+                                }, {
+                                    offset: 1, color: 'rgba(0, 208, 216, 0)'
+                                }]
+                            },
+                            origin: 'start'
+                        },
+                        data: data3
+                    },
+                    {
+                        name: '回捕产值（万元）',
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'emptyCircle',
+                        symbolSize: 10,
+                        yAxisIndex: 2,
+                        itemStyle: {
+                            color: 'rgba(92, 189, 255, 1)'
+                        },
+                        areaStyle: {
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [{
+                                    offset: 0, color: 'rgba(92, 189, 255, 1)'
+                                }, {
+                                    offset: 0.5, color: 'rgba(92, 189, 255, 0.3)'
+                                }, {
+                                    offset: 1, color: 'rgba(92, 189, 255, 0)'
+                                }]
+                            },
+                            origin: 'start'
+                        },
+                        data: data4
+                    }
+
+                ]
+            };
+
+            profChart.setOption(profOptions);
+
+            var map = new BMap.Map("map", {maxZoom: 13});    // 创建Map实例
+
+            var html = "<div class='infoBoxContent'><div class='title' id='infobox_name'>详情</div><a id='infobox_link' href='javascript:;'>查看详情&gt;&gt;</a><div class='arr'></div></div>";
+
+
+            var infoBox = new BMapLib.InfoBox(map, html, {
+
+                offset: {
+                    width: 0,
+                    height: 45
+                },
+
+                boxStyle: {
+
+                    opacity: "0.9",
+
+                    background: "rgba(0,14,98,0.7)",
+
+                    width: "300px",
+
+                    height: "auto",
+
+                    borderRadius: "20px"
+
+                },
+
+                closeIconUrl: "",
+
+
+                enableAutoPan: true,
+
+                align: INFOBOX_AT_TOP
+
+            });
+
+
+            map.setMapType(BMAP_HYBRID_MAP);
+            var cp = new BMap.Point(122.221917, 39.38203);
+            map.centerAndZoom(cp, 10);  // 初始化地图,设置中心点坐标和地图级别
+            map.setCurrentCity("大连");          // 设置地图显示的城市 此项是必须设置的
+            map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+            var bpoints = [];
+            points.forEach(function (i) {
+                var ico = new BMap.Icon("images/ico_point_" + i.cat + ".png", new BMap.Size(48, 64));
+                var marker = new BMap.Marker(new BMap.Point(i.bLon, i.bLat), {icon: ico});  // 创建标注
+                map.addOverlay(marker);               // 将标注添加到地图中
+
+                marker.name = i.name;
+                marker.ranchId = i.ranchId;
+
+                marker.addEventListener("click", function () {
+                    infoBox.open(this);
+                    $("#infobox_name").text(this.name);
+                    if (this.ranchId) {
+                        $("#infobox_link").attr("href", "realtime.html?name="+this.name);
+                    } else {
+                        $("#infobox_link").attr("href", "realtime.html?name="+this.name);
+                    }
+                    event.stopPropagation();
+
+                });
+
+                bpoints.push(new BMap.Point(i.bLon, i.bLat));
+            });
+
+            document.addEventListener("click", function () {
+                infoBox.close();
+            })
+
+            /*
+            setTimeout(function () {
+                map.setViewport(bpoints, {zoomFactor: 0});
+            }, 1000);
+        */
+
+
+        });
+
+
+    </script>
+
+</head>
+
+<body class="dashboard">
+<div class="page-title">
+    <h1>大连市海洋牧场数字化综合管理与服务平台</h1>
+</div>
+
+<div class="data">
+    <div class="left">
+        <div class="main-cons">
+            <h3 class="main-title-1">牧场建设情况</h3>
+            <div class="inner">
+                <div class="item">
+                    <div class="border-lt"></div>
+                    <div class="border-rt"></div>
+                    <div class="border-lb"></div>
+                    <div class="border-rb"></div>
+                    <h4 class="country"><span class="lr"></span>国家级牧场建设情况<span class="rr"></span></h4>
+                    <div class="line">
+                        <div class="label">数量</div>
+                        <div class="num">21家</div>
+                    </div>
+                    <div class="line">
+                        <div class="label">投礁总量</div>
+                        <div class="num" style="font-size: 16px;">107.73万空m<sup>3</sup></div>
+                    </div>
+                    <div class="line">
+                        <div class="label">总面积</div>
+                        <div class="num">15823公顷</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="border-lt"></div>
+                    <div class="border-rt"></div>
+                    <div class="border-lb"></div>
+                    <div class="border-rb"></div>
+                    <h4 class="city"><span class="lr"></span>市级牧场建设情况<span class="rr"></span></h4>
+                    <div class="line">
+                        <div class="label">数量</div>
+                        <div class="num">4家</div>
+                    </div>
+                    <div class="line">
+                        <div class="label">投礁总量</div>
+                        <div class="num" style="font-size: 16px;">15.67万空m<sup>3</sup></div>
+                    </div>
+                    <div class="line">
+                        <div class="label">总面积</div>
+                        <div class="num">893.8公顷</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sep-line"></div>
+
+        <div class="area-cons">
+            <h3 class="main-title-2">大连各区内牧场建设情况</h3>
+            <div id="area_chart"></div>
+        </div>
+
+        <div class="sep-line"></div>
+
+        <div class="all-cons">
+            <h3 class="main-title-1">总体建设情况</h3>
+            <div class="charts">
+                <div class="chart-item country-chart">
+                    <div id="country_chart"></div>
+                    <div class="txt">
+                        <p id="country_total" class="counter">0</p>
+                        <span>总数</span>
+                    </div>
+                    <div class="label">国家级</div>
+                </div>
+
+                <div class="chart-item city-chart">
+                    <div id="city_chart"></div>
+                    <div class="txt">
+                        <p id="city_total" class="counter">0</p>
+                        <span>总数</span>
+                    </div>
+                    <div class="label">市级</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="map">
+        <div class="border">
+        </div>
+        <div class="border-lt"></div>
+        <div class="border-rt"></div>
+        <div class="border-lb"></div>
+        <div class="border-rb"></div>
+        <div class="inner">
+            <div id="map">
+            </div>
+        </div>
+    </div>
+
+    <div class="right">
+
+        <div class="prof">
+            <h3 class="main-title-2">增殖放流及捕捞渔获量</h3>
+
+            <div class="items">
+                <div class="item">
+                    <div class="label">累计放流苗种</div>
+                    <div class="num">119<sub>亿余尾</sub></div>
+                    <div class="bg bg-1">
+                        <div class="bg-ico-1"></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="label">投入苗种资金</div>
+                    <div class="num">1.6<sub>亿元</sub></div>
+                    <div class="bg bg-2">
+                        <div class="bg-ico-2"></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="label">增加水产品产量</div>
+                    <div class="num">1.3<sub>万余吨</sub></div>
+                    <div class="bg bg-3">
+                        <div class="bg-ico-3"></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="label">直接投入产出比</div>
+                    <div class="num">1:10<sub>以上</sub></div>
+                    <div class="bg bg-4">
+                        <div class="bg-ico-4"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="sep-line"></div>
+
+        <div class="prof-chart">
+            <h3 class="main-title-2">2016-2019大连市增殖放流情况</h3>
+            <div id="prof_chart">
+            </div>
+        </div>
+
+        <div class="sep-line"></div>
+
+        <div class="rolling">
+            <h3 class="main-title-1">建设概况</h3>
+            <marquee direction="up" behavior="scroll" scrolldelay="200">
+                <div class="intro">
+                    <h1>海洋牧场概念</h1>
+                    <p>
+                        海洋牧场是养海牧渔、生态用海的现代渔业新形态。建设现代海洋牧场是转变渔业发展方式，发展现代渔业的重要举措和必然选择。辽宁毗邻黄渤两海，是我国海洋渔业大省。创建“资源节约、环境友好、生态安全”的现代海洋牧场，是实现我省渔业可持续发展的必由之路。
+                    </p>
+                    <p>
+                        现代化海洋牧场，是一种基于生态系统，利用现代科学技术支撑和运用现代管理理论与方法进行管理，最终实现生态健康、资源丰富、产品安全的一种现代海洋渔业生产方式。
+                    </p>
+                    <p>
+                        作为未来生态渔业的重要方向之一，现代化海洋牧场已写入2017、2018年中央一号文件，习近平总书记在讲话中也多次提到建设现代化海洋牧场，可以说现代化海洋牧场的建设理念将会引领我国现代渔业的健康可持续发展。
+                    </p>
+                    <p>
+                        从2015年开始，农业部组织开展了国家级海洋牧场示范区创建工作，计划通过五年左右的时间，在全国沿海创建一批区域代表性强、公益性功能突出的国家级海洋牧场示范区。截至目前，大连市共批复国家级海洋牧场示范区22个。
+                    </p>
+                    <h2>国家级海洋牧场</h2>
+                    <p class="p2">
+                    <ul>
+                        <li>大连獐子岛国家级海洋牧场示范区</li>
+                        <li>大连海洋岛国家级海洋牧场示范区</li>
+                        <li>大连财神岛国家级海洋牧场示范区</li>
+                        <li>大连市大长山岛海域金茂国家级海洋牧场示范区</li>
+                        <li>大连市小长山岛海域经典国家级海洋牧场示范区</li>
+                        <li>大连市蚂蚁岛海域国家级海洋牧场示范区</li>
+                        <li>大连市王家岛海域富谷国家级海洋牧场示范区</li>
+                        <li>大连市石城岛海域上品堂国家级海洋牧场示范区</li>
+                        <li>大连市海洋岛海域益得国家级海洋牧场示范区</li>
+                        <li>大连市平岛海域鑫玉龙国家级海洋牧场示范区</li>
+                        <li>大连市大长山海域龙腾湾国家级海洋牧场示范区</li>
+                        <li>大连市七顶山海域新时代国家级海洋牧场示范区</li>
+                        <li>大连市大李家海域迈童国家级海洋牧场示范区</li>
+                        <li>大连市金砣国家级海洋牧场示范区</li>
+                        <li>大连市杏树屯海域鹏兴国家级海洋牧场示范区</li>
+                        <li>大连市小长山岛海域中旺国家级海洋牧场示范区</li>
+                        <li>大连市长海县海域联友国家级海洋牧场示范区</li>
+                        <li>大连市庄河王家岛海域玉洋国家级海洋牧场示范区</li>
+                        <li>大连市大长山岛南部海域盛水湾国家级海洋牧场示范区</li>
+                        <li>大连市大长山岛海域壮元海国家级海洋牧场示范区</li>
+                        <li>大连市七顶山海域好客海洋国家级海洋牧场示范区</li>
+                        <li>大连市大长山岛海域耀扬国家级海洋牧场示范区</li>
+                    </ul>
+                    </p>
+                    <p>
+                        2019年开始，为进一步加快我市海洋牧场建设，参照《农业部关于创建国家级海洋牧场示范区的通知》（农渔发〔2015〕18号）《农业部办公厅关于印发
+                        国家级海洋牧场示范区管理工作规范
+                        （试行）>的通知》（农办渔〔2017〕59号）《农业农村部办公厅关于印发
+                        人工鱼礁建设项目管理细则>的通知》（农办渔〔2018〕66号）文件精神，大连市农业农村局组织开展大连市海洋牧场示范区建设，目前，共批复4个。
+                    </p>
+                    <h2>市级海洋牧场</h2>
+                    <p class="p2">
+                    <ul>
+                        <li>大连市大长山岛海域壮元海市级海洋牧场示范区建设</li>
+                        <li>大连市海洋岛海域海洋岛市级海洋牧场示范区建设</li>
+                        <li>大连市鹏兴市级海洋牧场示范区建设</li>
+                        <li>大连市王家岛海域明胜市级海洋牧场示范区建设</li>
+                    </ul>
+                    </p>
+                </div>
+            </marquee>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

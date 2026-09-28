@@ -1,0 +1,137 @@
+
+
+.data .left {
+    padding-left: 10px;
+}
+
+.data .left h3,
+.data .left .power-charts h3 {
+  background: url("../images/title_hbg_2.png") center no-repeat;
+  background-size: 100% 100%;
+  width: 128px;
+  height: 34px;
+  font-size: 19px;
+  line-height: 34px;
+}
+.data .left .power-charts .pie {
+    margin-left: 0;
+}
+
+.data .left .power-g {
+    margin-top: 35px;
+    padding: 10px;
+    position: relative;
+    height: 160px;
+}
+
+.data .left .power-g .chart {
+    height: 120px;
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    right: 40px;
+}
+
+.data .left .power-c {
+    padding: 10px;
+    position: relative;
+}
+
+.data .left .power-c .chart {
+    height: 170px;
+}
+
+.data .right h3,
+.data .map h3 {
+  background: url("../images/title_hbg_2.png") center no-repeat;
+  background-size: 100% 100%;
+  width: 128px;
+  height: 34px;
+  font-size: 19px;
+  line-height: 34px;
+  margin-top: 40px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.data .map h3 {
+    margin-top: 0;
+}
+
+.data .right .weather-w {
+    padding: 10px;
+}
+
+.data .right .weather-w .chart {
+    height: 200px;
+}
+
+.data h4 {
+    color: #FFFFFF;
+    font-size: 13px;
+    text-align: left;
+    position: relative;
+    padding-left: 23px;
+    height: 16px;
+    line-height: 16px;
+}
+
+.data h4 .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    background: #fff;
+}
+
+.data .right .weather-t {
+    padding: 10px;
+}
+
+.data .right .weather-t .chart {
+    height: 200px;
+}
+
+.data .right .water-w {
+    padding: 10px;
+}
+
+.data .right .water-w .chart {
+    height: 200px;
+}
+
+
+.data .map {
+    height: 810px;
+    width: 700px;
+    left: -15px;
+    margin-top: 10px;
+}
+
+.data .map .inner {
+    border: none;
+}
+
+.data .map .charts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.data .map .charts .item {
+    width: 325px;
+    height: 230px;
+    margin-top: 18px;
+}
+
+.data .map .charts .item .chart {
+    height: 210px;
+}
+
+
+
+
+
